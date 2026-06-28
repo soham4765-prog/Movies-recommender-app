@@ -18,7 +18,7 @@ st.set_page_config(
 def load_data():
 
     # Load processed dataframe
-    movies = pickle.load(open("movies.pickle", "rb"))
+    movies = pickle.load(open("movie.pickle", "rb"))
 
     # Create vectors
     cv = CountVectorizer(
