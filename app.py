@@ -39,8 +39,7 @@ movies, similarity = load_data()
 # ---------------------- Recommendation Function ----------------------
 
 def recommend(movie):
-
-    movie_index = movies[movies["title"] == movie].index[0]
+    movie_index = movies[movies['title'] == movie].index[0]
 
     distances = similarity[movie_index]
 
@@ -53,26 +52,20 @@ def recommend(movie):
     recommended_movies = []
 
     for i in movie_list:
-        recommended_movies.append(
-            movies.iloc[i[0]].title
-        )
+        recommended_movies.append(movies.iloc[i[0]]['title'])
 
     return recommended_movies
-
-
 # ---------------------- Streamlit UI ----------------------
-
-st.title("🎬 Movie Recommender System")
-
-st.write("Reached UI")
 
 selected_movie = st.selectbox(
     "Select a movie",
-    movies["title"].values
+    movies['title'].values
 )
 
-st.write("Reached Selectbox")
+if st.button("Recommend"):
+    recommendations = recommend(selected_movie)
 
-st.button("Recommend")
+    st.subheader("Recommended Movies")
 
-st.write("Reached Button")
+    for movie in recommendations:
+        st.write(movie)
